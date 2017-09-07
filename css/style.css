@@ -1,0 +1,96 @@
+html, body{
+    overflow-x: hidden;
+    background-color: #fafafa;
+  }
+ 
+  body, button  {
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    color:#333333;
+    margin-top: 0;
+  }
+ 
+ 
+  div {
+    box-sizing: border-box;
+  }
+ 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Varela Round", Helvetica, Arial, sans-serif;
+  }
+ 
+  h1 {
+    font-size:36px;
+    color: #fafafa;
+    font-weight: normal;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+  }
+ 
+ 
+  p {
+    font-size:16px;
+    line-height: 19px;
+    font-weight: 100;
+  }
+ 
+  a {
+    color: #23AAE1;
+    text-decoration: none;
+    font-weight: 570;
+  }
+ 
+  ul, li {
+    list-style: none;
+    text-align: left;
+    padding: 0px;
+  }
+ 
+ 
+ 
+  /* HEADER */
+  header {
+    background-color: #262228;
+    padding: 10px 0px;
+    box-sizing: border-box;
+  }
+ 
+  header div {
+    height: 50px;
+ 
+  }
+ 
+  div.forms p {
+    color: #fafafa;
+  }
+
+ 
+
+  .form-control {
+    max-width: 135px;
+  }
+
+
+  
+
+  /*Form*/
+
+.btn-default {
+    border-style: none;
+    border-color: #262228;
+    background-color: #fafafa;
+    margin: auto;
+    padding: auto;
+    height: 15px;
+  }
+ 
+ 
+ 
+button.active {
+   background-color: #333333;
+   color: whitesmoke;
+  }
+  
+.money::before {
+    content: "$";
+}
