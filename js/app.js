@@ -1,13 +1,11 @@
+//You Don't Know JavaScript - Chapter 1
 
-// document.getElementById("submit").addEventListener('click', myFunction);
-// function myFunction(e){
-//     var result = document.getElementById('bankAccountBalance').value;
-//     alert(result);
-// }
+//2 Event Listeners - click and keyup
 document.getElementById("submit").addEventListener('click', calculateResult);
 
 document.getElementById("bankAccountBalance").addEventListener('keyup', formatInput );
 
+//Calculate result and display to user
 function calculateResult(b,s){
     var input = document.getElementById('bankAccountBalance').value;//bank balance set by user fprmatted as a string
     var bankAccountBalance = getNumber(input);
@@ -35,6 +33,7 @@ function calculateResult(b,s){
 
 };
 
+//Get value of radio button selected
 function getSpendingThreshold() {
     //for loop finding val of radial input
     var options = document.getElementsByName('optionsRadios');
@@ -48,6 +47,7 @@ function getSpendingThreshold() {
     return Number(s); //which one they selected
 };
 
+//convert and format inputs and outputs for calculation and display
 function formatOutput(amount) {
     var spent = amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	return "$" + spent;
