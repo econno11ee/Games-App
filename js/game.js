@@ -1,84 +1,80 @@
-//Tic-tac-toe
+//Constructs game object which keeps track of the aiplayer object, the status of the game(beginning, running, or over), and the state object.
 
-//Represents a state in the game
+//by assigning a new state with properties turn = "X", board = an array of 9 strings with the value "Embpty", and status = "beginning" to var currentState.  
+//When the start function is called,that state is passed to the advanceTo function, which takes whatever state is passed in and reassigns it to currentState,
+//assesses the isTerminal and either the result or turn property of that state and updates the ui accordingly
 
-var State = function (oldState) {
-    //declare object variables
-    this.turn = "";
-    this.oMovesCount = 0;
-    this.result = "still running";
-    this.board = [];
-   
+var Game = function(autoPlayer) {
+    
+    //initializes the aiplayer for this game
+    this.ai = autoPlayer
 
-    //Begin object Construction
-    if(typeof oldState !== "undefined") {
-        var len = oldState.board.length;
-        this.board = new Array(len);
-        for (var i; i<len;i++){
-            this.board[i]=oldState.board[i];
-        }
+    //initializes the current state to an empy board configuration
+    this.currentState = new State();
 
-        this.oMovesCount = oldState.oMovesCount;
-        this.result = oldState.result;
-        this.turn = oldState.turn;
-    }
+    this.currentState.board = ["Empty","Empty","Empty",
+                                "Empty","Empty","Empty",
+                                "Empty","Empty","Empty"];
+    
+    this.currentState.turn = "X"; //X plays first
 
-    //End object construction
+    //initialize game status
+    this.status = "beginning";
 
-    //advance the turn
 
-    this.advanceTurn = function() {
-        this.turn = this.turn === "X" ?  "O" : "X";
-    }
+    //a function to advance the game to a new state
+    this.advanceTo = function(_state) {
 
-    //count empty cells
+        //resets the currentState var to _state
+        this.currentState = _state;
 
-    this.emptyCells = function() {
-        var empties = [];
-        for(var i=0;i<9;i++) {
-            if(this.board[i]==="empty") {
-                empties.push(i);
-            }
-        }
-        return empties;
-    }
-
-    //check if the game is over
-    this.isOver = function() {
-        var B = this.board;
-
-        //check for completed rows
-        for(var i=0; i<=6;i=i + 3) {
-            if (B[i] !== "Empty" && B[i] === B[i+1] && B[i+1] == B[i + 2]) {
-                this.result =B[i] + "-won";
-                return true;
-            }
-        }
-        
-        //check for completed columns
-        for(var i=0; i<=2;i=i++) {
-            if (B[i] !== "Empty" && B[i] === B[i+3] && B[i+1] == B[i + 6]) {
-                this.result =B[i] + "-won";
-                return true;
-            }
-        }
-
-        //check for completed diagonals
-        for(var i=0, j=4; i<=2;i=i+2, j=j-2) {
-            if (B[i] !== "Empty" && B[i] === B[i+j] && B[i+j] == B[i + 2*j]) {
-                this.result =B[i] + "-won";
-                return true;
-            }
-        }
-        //cehck for a draw
-
-        var available = this.emptyCells();
-        if(available.length == 0) {
-            this.result="draw";
-            return true;
+        //sets the result property of _state, updates the ui, and calls ai.notify
+        if(_state.isTerminal()) {
+            this.status = "ended";
+            if(_state.result === "X-won")
+                Ui.switchViewTo("won");
+            else if(_state.result === "O-won")
+                ui.switchViewTo("lost");
+            else
+                ui.switchViewTo("eat's eye");
         }
         else {
-            return false;
+            if(this.currentState.turn === "X") {
+                ui.switchViewTo("human");
+            }
+            else {
+                ui.switchViewTo("robot");
+
+                this.ai.notify("O");
+            }
         }
     };
+
+    //
+    this.start = function() {
+        if(this.status = "beginning") {
+            this.advanceTo(this.currentState);
+            this.status = "running";
+        }
+    }
+
 };
+
+//calculates final score (ai's goal is to minimize human player's score. The max
+//score a human can get is 8)
+Game.score = function(_state) {
+    if (_state.result !== "still running") {
+        if (_state.result == "X-won") {
+        return 10 - oMovesCount;
+        } 
+        else if(_state.result == "O-won") {
+            return -10 + oMovesCount;
+        }
+        else {
+            return 0;
+        }
+    }
+}
+
+
+
