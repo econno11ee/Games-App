@@ -12,6 +12,7 @@ $(".level").each(function() {
         $this.toggleClass('selected');
 
         ai.level = $this.attr("id");
+        
     });
 
 });
@@ -19,15 +20,19 @@ $(".level").each(function() {
 //upon clicking start, set the var selectedDifficulty to the level you chose, create a new AI object passing the selectedDifficulty in as a parameter, create a
 //new, global game object passing in the new AI object as a parameter, call the plays method of the new AI object, passing in the new game
 //object as a parameter and the start method of the game object.
-$(".start").click(function() {
+$(".start").on('click',function() {
     var selectedDifficulty = $('.selected').attr("id");
+    console.log(selectedDifficulty);
     if(typeof selectedDifficulty !== "undefined") {
         var aiPlayer = new AI(selectedDifficulty);
-        globals.game = new Game(aiPlayer);
-
-        aiPlayer.plays(globals.game);
-
-        globals.game.start();
+       
+        game = new Game(aiPlayer);
+      
+        aiPlayer.plays(game);
+       
+        game.start();
+        
+      
     }
 });
 
@@ -36,19 +41,22 @@ $(".start").click(function() {
 //property of the game object as a parameter, assign the index of the board property (an array) the value "X", change the UI, call advanceTurn, andadvanceTo 
 $(".cell").each(function() {
     var $this = $(this);
-    $this.click(function() {
-        if(globals.game.status === "running" && globals.game.currentState.turn === "X" && !$this.hasClass('occupied')) {
+    $this.on('click', function() {
+        
+        if(game.status === "running" && game.currentState.turn === "X" && !$this.hasClass('occupied')) {
             var indx = parseInt($this.data("indx"));
-
-            var next = new State(globals.game.currentState);
+          
+            var next = new State(game.currentState);
             next.board[indx] = "X";
+            console.log(next.board);
 
             ui.insertAt(indx, "X");
 
             next.advanceTurn();
-
-            globals.game.advanceTo(next);
-
+            console.log(next.turn);
+            
+            game.advanceTo(next);
+            
         }
     })
 });

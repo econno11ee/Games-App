@@ -12,12 +12,13 @@ var State = function (oldState) {
 
     //Begin object Construction
     if(typeof oldState !== "undefined") {
-        var len = oldState.board.length;
-        this.board = new Array(len);
-        for (var i; i<len;i++){
-            this.board[i]=oldState.board[i];
-        }
-
+        // var len = oldState.board.length;
+        // console.log(oldState.board);
+        // this.board = new Array(len);
+        // for (var i; i<len;i++){
+        //     this.board[i]=oldState.board[i];
+        // }
+        this.board = oldState.board;
         this.oMovesCount = oldState.oMovesCount;
         this.result = oldState.result;
         this.turn = oldState.turn;
@@ -46,21 +47,21 @@ var State = function (oldState) {
     //check if the game is over
     this.isOver = function() {
         var B = this.board;
-
         //check for completed rows
         for(var i=0; i<=6;i=i + 3) {
             if (B[i] !== "Empty" && B[i] === B[i+1] && B[i+1] == B[i + 2]) {
                 this.result =B[i] + "-won";
                 return true;
             }
+          
         }
         
         //check for completed columns
-        for(var i=0; i<=2;i=i++) {
+        for(var i=0; i<=2;i++) {
             if (B[i] !== "Empty" && B[i] === B[i+3] && B[i+1] == B[i + 6]) {
                 this.result =B[i] + "-won";
                 return true;
-            }
+            }  
         }
 
         //check for completed diagonals
@@ -70,11 +71,11 @@ var State = function (oldState) {
                 return true;
             }
         }
-        //cehck for a draw
+        //check for a cats-eye
 
-        var available = this.emptyCells();
+        var available = this.emptyCells();     
         if(available.length == 0) {
-            this.result="draw";
+            this.result="cats-eye";
             return true;
         }
         else {

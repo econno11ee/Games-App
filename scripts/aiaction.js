@@ -15,7 +15,7 @@ var AIAction = function(pos) {
         next.board[this.movePosition] = state.turn;
 
         //increments the oMovesCount propert of the next state and calls advanceTurn, and returns the next state 
-        if(state.turn === "0")
+        if(state.turn === "O")
             next.oMovesCount++;
         next.advanceTurn();
         return next;

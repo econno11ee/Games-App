@@ -3,15 +3,17 @@
 //A global variable that represents the AI Player, takes level as a parameter, assigns the game, and defines a function .notify to
 //return a number based on the level chosen
 var AI = function(level) {
-    var levelOfIntelligence= level;
-    var game = {};
+    this.levelOfIntelligence= level;
+    console.log(this.levelOfIntelligence);
+    this.game = {};
+    
     //a recursive function that calculates the minimax value of a potential action(ie
-//probable final score from O's action).  The name is minimax because O maximizes
-//it's score by minimizing X's score 
-function minimaxValue(state) {
+    //probable final score from O's action).  The name is minimax because O maximizes
+    //it's score by minimizing X's score 
+    function minimaxValue(state) {
     //if the game is over, calculate the score
-        if(state.isTerminal()) {
-            return Game.score(state);
+        if(state.isOver()) {
+            return Game.score(state);A
         }
         else {
             var stateScore; //stores the calculated minimax
@@ -30,7 +32,7 @@ function minimaxValue(state) {
                 return nextState;
     
     
-            });
+            })
         //for each nextState in the availableNextStates array, check if it is the end of the game and return the score
         //if it is. If it is not the end of the score, get another round of available states, and, for each of those,
         //check if it is the end of the game and return the score if it is, and so on...
@@ -49,9 +51,11 @@ function minimaxValue(state) {
         });
         return stateScore;
         }
-    }
+    };
+
     function takeABlindMove(turn) {
         var available = game.currentState.emptyCells();
+        console.log(available);
         var randomCell = available[Math.floor(Math.random() * available.length)];
         var action = new AIAction(randomCell);
     
@@ -77,7 +81,6 @@ function minimaxValue(state) {
             availableActions.sort(AIAction.DESCENDING);
         else
             availableActions.sort(AIAction.ASCENDING);
-            };
         var chosenAction;
         if(Math.random()*100<=40) {
             chosenAction = availableActions[0];
@@ -93,14 +96,15 @@ function minimaxValue(state) {
     var next = chosenAction.applyTo(game.currentState);
     ui.insertAt(chosenAction.movePosition, turn);
     game.advanceTo(next);
+    };   
 
 
     function takeAMasterMove(turn) {
         //get an array of emptyCells
         var available = game.currentState.emptyCells();
         //get an array of available actions that include the movePosition and the minimaxVal
-        var availaleActions = available.map(function(pos) {
-            var action = newAIAction(pos);
+        var availableActions = available.map(function(pos) {
+            var action = new AIAction(pos);
             //for each empty cell, get the new board array, oMovesCount, and turn
             var next = action.applyTo(game.currentState);
             //set the minimaxVal variable of AIAction object to the stateScore for each possible terminal state
@@ -129,14 +133,22 @@ function minimaxValue(state) {
 
     //specifies the game the object will play, by setting the game object to that game
     this.plays = function(_game){
-        game=_game;
+        this.game=_game;
     };
     
     //call the appropriate takeAMove function based on the level
     this.notify = function(turn) {
-        switch(levelOfIntelligence) {
-            case "blind": takeABlindMove(turn);break;
-            case "novice": takeANoviceMove(turn);break;
-            case "master": takeAMasterMove(turn);break;
+        console.log(this.levelOfIntelligence);
+        switch(this.levelOfIntelligence) {
+            case "blind": 
+                takeABlindMove(turn);
+                break;
+            case "novice": 
+                takeANoviceMove(turn)
+                break;
+            case "master": 
+            takeAMasterMove(turn);
+            break;
         }
-    }}
+    }
+};

@@ -2,13 +2,13 @@
 
 //by assigning a new state with properties turn = "X", board = an array of 9 strings with the value "Embpty", and status = "beginning" to var currentState.  
 //When the start function is called,that state is passed to the advanceTo function, which takes whatever state is passed in and reassigns it to currentState,
-//assesses the isTerminal and either the result or turn property of that state and updates the ui accordingly
+//assesses the isOver and either the result or turn property of that state and updates the ui accordingly
 
 var Game = function(autoPlayer) {
     
     //initializes the aiplayer for this game
-    this.ai = autoPlayer
-
+    this.ai = autoPlayer;
+    
     //initializes the current state to an empy board configuration
     this.currentState = new State();
 
@@ -27,16 +27,16 @@ var Game = function(autoPlayer) {
 
         //resets the currentState var to _state
         this.currentState = _state;
-
+        
         //sets the result property of _state, updates the ui, and calls ai.notify
-        if(_state.isTerminal()) {
+        if(_state.isOver()) {
             this.status = "ended";
             if(_state.result === "X-won")
-                Ui.switchViewTo("won");
+                ui.switchViewTo("won");
             else if(_state.result === "O-won")
                 ui.switchViewTo("lost");
             else
-                ui.switchViewTo("eat's eye");
+                ui.switchViewTo("cats-eye");
         }
         else {
             if(this.currentState.turn === "X") {
@@ -44,19 +44,23 @@ var Game = function(autoPlayer) {
             }
             else {
                 ui.switchViewTo("robot");
-
+                console.log(this.ai);
                 this.ai.notify("O");
+                
             }
         }
+        
     };
 
     //
     this.start = function() {
         if(this.status = "beginning") {
+            
             this.advanceTo(this.currentState);
             this.status = "running";
+            
         }
-    }
+    };
 
 };
 
@@ -65,10 +69,10 @@ var Game = function(autoPlayer) {
 Game.score = function(_state) {
     if (_state.result !== "still running") {
         if (_state.result == "X-won") {
-        return 10 - oMovesCount;
+        return 10 - _state.oMovesCount;
         } 
         else if(_state.result == "O-won") {
-            return -10 + oMovesCount;
+            return -10 + _state.oMovesCount;
         }
         else {
             return 0;
