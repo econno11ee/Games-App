@@ -12,13 +12,12 @@ var State = function (oldState) {
 
     //Begin object Construction
     if(typeof oldState !== "undefined") {
-        // var len = oldState.board.length;
-        // console.log(oldState.board);
-        // this.board = new Array(len);
-        // for (var i; i<len;i++){
-        //     this.board[i]=oldState.board[i];
-        // }
-        this.board = oldState.board;
+        var len = oldState.board.length;
+        this.board = new Array(len);
+        for (var i=0; i<len;i++){
+           this.board[i]= oldState.board[i];
+        }
+        
         this.oMovesCount = oldState.oMovesCount;
         this.result = oldState.result;
         this.turn = oldState.turn;
@@ -36,7 +35,7 @@ var State = function (oldState) {
 
     this.emptyCells = function() {
         var empties = [];
-        for(var i=0;i<9;i++) {
+        for(var i=0;i<9;i++) { 
             if(this.board[i]==="Empty") {
                 empties.push(i);
             }
@@ -49,7 +48,7 @@ var State = function (oldState) {
         var B = this.board;
         //check for completed rows
         for(var i=0; i<=6;i=i + 3) {
-            if (B[i] !== "Empty" && B[i] === B[i+1] && B[i+1] == B[i + 2]) {
+            if (B[i] !== "Empty" && B[i] === B[i+1] && B[i+1] === B[i + 2]) {
                 this.result =B[i] + "-won";
                 return true;
             }
@@ -58,7 +57,7 @@ var State = function (oldState) {
         
         //check for completed columns
         for(var i=0; i<=2;i++) {
-            if (B[i] !== "Empty" && B[i] === B[i+3] && B[i+1] == B[i + 6]) {
+            if (B[i] !== "Empty" && B[i] === B[i+3] && B[i+3] === B[i + 6]) {
                 this.result =B[i] + "-won";
                 return true;
             }  
@@ -66,7 +65,7 @@ var State = function (oldState) {
 
         //check for completed diagonals
         for(var i=0, j=4; i<=2;i=i+2, j=j-2) {
-            if (B[i] !== "Empty" && B[i] === B[i+j] && B[i+j] == B[i + 2*j]) {
+            if (B[i] !== "Empty" && B[i] === B[i+j] && B[i+j] === B[i + 2*j]) {
                 this.result =B[i] + "-won";
                 return true;
             }

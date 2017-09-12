@@ -4,7 +4,6 @@
 //return a number based on the level chosen
 var AI = function(level) {
     this.levelOfIntelligence= level;
-    console.log(this.levelOfIntelligence);
     this.game = {};
     
     //a recursive function that calculates the minimax value of a potential action(ie
@@ -55,7 +54,6 @@ var AI = function(level) {
 
     function takeABlindMove(turn) {
         var available = game.currentState.emptyCells();
-        console.log(available);
         var randomCell = available[Math.floor(Math.random() * available.length)];
         var action = new AIAction(randomCell);
     
@@ -68,34 +66,43 @@ var AI = function(level) {
     };
 
     function takeANoviceMove(turn) {
+        console.log(game.currentState);
+        console.log(game.currentState.emptyCells());
         var available = game.currentState.emptyCells();
-
+        console.log(available);
+        console.log(game.currentState);
         var availableActions = available.map(function(pos) {
             var action = new AIAction(pos);
             var nextState = action.applyTo(game.currentState);
             action.minimaxVal = minimaxValue(nextState);
             return action;
         });
+        console.log(availableActions);
+
+        
 
         if(turn === "X")
             availableActions.sort(AIAction.DESCENDING);
         else
             availableActions.sort(AIAction.ASCENDING);
-        var chosenAction;
-        if(Math.random()*100<=40) {
-            chosenAction = availableActions[0];
-        }
-        else {
-            if(availableActions.length >= 2) {
-                chosenAction = availableActions[1];
+            var chosenAction;
+            if(Math.random()*100<=40) {
+                chosenAction = availableActions[0];
             }
-        else {
-            chosenAction = availableActions[0];
-        }
+            else {
+                if(availableActions.length >= 2) {
+                    chosenAction = availableActions[1];
+                }
+            else {
+                chosenAction = availableActions[0];
+            }
     }
-    var next = chosenAction.applyTo(game.currentState);
-    ui.insertAt(chosenAction.movePosition, turn);
-    game.advanceTo(next);
+    console.log(chosenAction);
+        var next = chosenAction.applyTo(game.currentState);
+        console.log(game.currentState);
+        console.log(next);
+        ui.insertAt(chosenAction.movePosition, turn);
+        game.advanceTo(next);
     };   
 
 
@@ -121,7 +128,7 @@ var AI = function(level) {
         else
             //if O played last, Ai wants to minimize, so list list minimaxVals from smallest to largest to
             //bet ai's best move?
-            availableActions.sort(AIActions.ASCENDING);
+            availableActions.sort(AIAction.ASCENDING);
     //choose the first action from the availableActions array
     var chosenAction = availableActions[0];
     var next = chosenAction.applyTo(game.currentState);
@@ -138,7 +145,7 @@ var AI = function(level) {
     
     //call the appropriate takeAMove function based on the level
     this.notify = function(turn) {
-        console.log(this.levelOfIntelligence);
+        console.log(turn);
         switch(this.levelOfIntelligence) {
             case "blind": 
                 takeABlindMove(turn);

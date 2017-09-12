@@ -27,7 +27,6 @@ var Game = function(autoPlayer) {
 
         //resets the currentState var to _state
         this.currentState = _state;
-        
         //sets the result property of _state, updates the ui, and calls ai.notify
         if(_state.isOver()) {
             this.status = "ended";
@@ -44,7 +43,6 @@ var Game = function(autoPlayer) {
             }
             else {
                 ui.switchViewTo("robot");
-                console.log(this.ai);
                 this.ai.notify("O");
                 
             }

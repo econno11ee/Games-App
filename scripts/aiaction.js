@@ -10,13 +10,12 @@ var AIAction = function(pos) {
     //the next state resulting from applying the action to the current state
     this.applyTo = function(state) {
         var next = new State (state);
-
         //sets the value of the index of the board array chosen by the ai to "0" for the next state
         next.board[this.movePosition] = state.turn;
 
         //increments the oMovesCount propert of the next state and calls advanceTurn, and returns the next state 
         if(state.turn === "O")
-            next.oMovesCount++;
+            next.oMovesCount++; 
         next.advanceTurn();
         return next;
         

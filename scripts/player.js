@@ -22,7 +22,6 @@ $(".level").each(function() {
 //object as a parameter and the start method of the game object.
 $(".start").on('click',function() {
     var selectedDifficulty = $('.selected').attr("id");
-    console.log(selectedDifficulty);
     if(typeof selectedDifficulty !== "undefined") {
         var aiPlayer = new AI(selectedDifficulty);
        
@@ -45,18 +44,16 @@ $(".cell").each(function() {
         
         if(game.status === "running" && game.currentState.turn === "X" && !$this.hasClass('occupied')) {
             var indx = parseInt($this.data("indx"));
-          
+            console.log(game.currentState.board);
             var next = new State(game.currentState);
-            next.board[indx] = "X";
             console.log(next.board);
-
+            next.board[indx] = "X";
             ui.insertAt(indx, "X");
 
-            next.advanceTurn();
-            console.log(next.turn);
+            next.advanceTurn();//-->advances the turn to "O"
             
-            game.advanceTo(next);
-            
+            game.advanceTo(next);//-->calls this.ai.notify("O")-->calls takeANoviceTurn("O")
+
         }
     })
 });
