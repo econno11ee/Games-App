@@ -1,5 +1,4 @@
 //Constructs game object which keeps track of the aiplayer object, the status of the game(beginning, running, or over), and the state object.
-
 //by assigning a new state with properties turn = "X", board = an array of 9 strings with the value "Embpty", and status = "beginning" to var currentState.  
 //When the start function is called,that state is passed to the advanceTo function, which takes whatever state is passed in and reassigns it to currentState,
 //assesses the isOver and either the result or turn property of that state and updates the ui accordingly
