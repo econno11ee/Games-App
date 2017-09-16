@@ -55,17 +55,13 @@ namespace TicTacToe_App.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GamePlayed,Level, Duration,PlayerID,AI_Won,DatePlayed")] Game game)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Games.Add(game);
+       
+        public ActionResult Create(Game stats)
+        {           
+                db.Games.Add(stats);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-
-            return View(game);
+          
         }
 
         // GET: Games/Edit/5
