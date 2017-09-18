@@ -22,8 +22,8 @@ namespace Game_App.Models
         [StringLength(128)]
         public string PlayerID { get; set; }
 
-        [Column("AI Won")]
-        public bool AI_Won { get; set; }
+        [StringLength(50)]
+        public string Result { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? DatePlayed { get; set; }

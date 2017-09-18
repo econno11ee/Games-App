@@ -19,10 +19,7 @@ player.prototype._selectLevel = function(){
     $('.selected').toggleClass('not-selected');
     $('.selected').toggleClass('selected');
     $this.toggleClass('not-selected');
-    $this.toggleClass('selected');
-    ai.level = $this.attr("id");
-    console.log(ai.level);
-        
+    $this.toggleClass('selected');       
     };
 
 
@@ -35,8 +32,9 @@ player.prototype._startGame = function () {
     var selectedDifficulty = $('.selected').attr("id");
     if(typeof selectedDifficulty !== "undefined") {
         var aiPlayer = new AI(selectedDifficulty);
-       
-        game = new Game(aiPlayer);
+        var humanPlayer = player.prototype;
+
+        game = new Game(aiPlayer, humanPlayer);
       
         aiPlayer.plays(game);
        
@@ -52,18 +50,27 @@ player.prototype._takeAHumanMove = function () {
     var $this = $(this);
     if(game.status === "running" && game.currentState.turn === "X" && !$this.hasClass('occupied')) {
         var indx = parseInt($this.data("indx"));
-        console.log(game.currentState.board);
         var next = new State(game.currentState);
-        console.log(next.board);
         next.board[indx] = "X";
         ui.insertAt(indx, "X");
-
         next.advanceTurn();//-->advances the turn to "O"
-        
         game.advanceTo(next);//-->calls this.ai.notify("O")-->calls takeANoviceTurn("O")
 
         }
-    };
+};
+
+player.prototype._storeGameStats = function (stats) {
+    
+    var url = "http://localhost:50685/Games/Create";
+    console.log(stats);
+    $.ajax({
+        type: "POST", url: url, data: stats, success: function (result) {
+            alert(result)
+        },
+        dataType: 'jsonp',
+    });
+    
+};
 
 var gnewPlayer = new player();
 

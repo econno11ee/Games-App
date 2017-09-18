@@ -3,8 +3,9 @@
 //When the start function is called,that state is passed to the advanceTo function, which takes whatever state is passed in and reassigns it to currentState,
 //assesses the isOver and either the result or turn property of that state and updates the ui accordingly
 
-var Game = function(autoPlayer) {
-    
+var Game = function(autoPlayer, player) {
+
+    this.player = player;
     //initializes the aiplayer for this game
     this.ai = autoPlayer;
     
@@ -19,16 +20,28 @@ var Game = function(autoPlayer) {
 
     //initialize game status
     this.status = "beginning";
-
+   
 
     //a function to advance the game to a new state
-    this.advanceTo = function(_state) {
-
+    this.advanceTo = function (_state) {
+        
+        var stats = function (_state) {
+            this.GamePlayed = "TicTacToe";
+            this.Level = autoPlayer.levelOfIntelligence;
+            this.Duration = 5;
+            this.PlayerID = "05cbcb7d-eeed-46dc-a698-9b92e9d39808"
+            this.Result = _state.result;
+            this.DatePlayed = new Date();
+        };
         //resets the currentState var to _state
         this.currentState = _state;
         //sets the result property of _state, updates the ui, and calls ai.notify
-        if(_state.isOver()) {
+        if (_state.isOver()) {          
+            var gameStats = new stats(_state);
+           
             this.status = "ended";
+            this.player._storeGameStats(gameStats);
+
             if(_state.result === "X-won")
                 ui.switchViewTo("won");
             else if(_state.result === "O-won")

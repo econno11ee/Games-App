@@ -8,6 +8,7 @@ var State = function (oldState) {
     this.oMovesCount = 0;
     this.result = "still running";
     this.board = [];
+    this.gameStats = {};
    
 
     //Begin object Construction
