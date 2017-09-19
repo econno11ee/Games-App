@@ -1,0 +1,62 @@
+﻿@model Game_App.Models.Game
+
+@{
+    ViewBag.Title = "JS Practice";
+}
+
+   
+    <section class="container-fluid" id="chapter1">
+        <div class="row">B
+            <div class="col-lg-3">
+                <h1>You Don't Know JS</h1>
+                <h2>CHAPTER 1: Into Programming</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="Bank Account">What is your bank account balance?</label>
+                        <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" id="bankAccountBalance" placeholder="Bank Account Balance">
+                        </div>
+                    </div> 
+                    <fieldset class="form-group">
+                            <legend>What seems like a lot of money to you?</legend>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="option1" value="100" checked>
+                                $100
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="option2" value="200">
+                                $200
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="option3" value="300">
+                                $300
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="option4" value="400">
+                                $400
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="optionsRadios" id="option5" value="500">
+                                $500
+                                </label>
+                            </div>
+                    </fieldset>   
+                   
+                </form>
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                <ul id="results">
+                
+                </ul>
+            </div>
+        </div>
+    </section>

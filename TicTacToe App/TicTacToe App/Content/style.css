@@ -1,0 +1,182 @@
+html, body{
+    overflow-x: hidden;
+    background-color: #fafafa;
+  }
+ 
+  body, button  {
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    color:#333333;
+    margin-top: 0;
+  }
+ 
+ 
+  div {
+    box-sizing: border-box;
+  }
+ 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Varela Round", Helvetica, Arial, sans-serif;
+  }
+ 
+  h1 {
+    font-size:36px;
+    color: #286090;
+    font-weight: normal;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+  }
+ 
+ 
+  p {
+    font-size:16px;
+    line-height: 19px;
+    font-weight: 100;
+  }
+ 
+  a {
+    color: #23AAE1;
+    text-decoration: none;
+    font-weight: 570;
+  }
+ 
+  ul, li {
+    list-style: none;
+    text-align: left;
+    padding: 0px;
+  }
+ 
+ 
+ 
+  /* HEADER */
+  header {
+    background-color: #262228;
+    padding: 10px 0px;
+    box-sizing: border-box;
+  }
+ 
+  header div {
+    height: 50px;
+ 
+  }
+ 
+  div.forms p {
+    color: #fafafa;
+  }
+
+ 
+
+  .form-control {
+    max-width: 135px;
+  }
+
+
+  
+
+  /*Form*/
+
+.btn-default {
+    border-style: none;
+    border-color: #262228;
+    background-color: #fafafa;
+    margin: auto;
+    padding: auto;
+    height: 15px;
+  }
+ 
+ 
+ 
+button.active {
+   background-color: #333333;
+   color: whitesmoke;
+  }
+  
+.money::before {
+    content: "$";
+}
+
+/*Tic-Tac-Toe*/
+.main-container {
+  padding-top: 50px;
+  height: 100%;
+  width: 900px;
+  margin: 0 auto;
+}
+
+.board {
+  height: 420px;
+  width: 420px;
+  margin: 0 auto;
+}
+
+.cell {
+  width: 140px;
+  height: 140px;
+  border: 2px dashed lightskyblue;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  cursor:pointer;
+  float:left;
+  line-height: 140px;
+  text-align: center;
+  font-family: "Arial Narrow";
+  font-weight: bold;
+  font-size: 70px;
+}
+
+.control {
+  font-family: "Arial Narrow";
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top:40px;
+}
+
+.level {
+  margin: 0 15px;
+  color: lightskyblue;
+  cursor: pointer;
+}
+
+.not-selected {
+  opacity: 0.5;
+}
+
+.not-selected:hover {
+  opacity:1;
+}
+
+.start {
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: #87CEFA;
+  line-height: 100px;
+  text-align: center;
+  border-radius: 50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  cursor:pointer;
+  opacity:0.5;
+}
+
+.start:hover {
+  opacity:1;
+}
+
+.ingame {
+  display:none;
+  color:lightskyblue;
+}
+
+.ingame > p {
+  margin:0px;
+}
+
+.robot {
+  opacity:0.5;
+}
