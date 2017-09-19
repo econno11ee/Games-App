@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Game_App.Models;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Game_App.Models;
 
 namespace TicTacToe_App.Controllers
 {
@@ -25,6 +22,7 @@ namespace TicTacToe_App.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult TicTacToe()
         {
             return View();
@@ -57,9 +55,16 @@ namespace TicTacToe_App.Controllers
         [HttpPost]
        
         public ActionResult Create(Game stats)
-        {           
-                db.Games.Add(stats);
-                db.SaveChanges();
+        {
+                Game game = new Game();
+                game.GamePlayed = "TicTacToe";
+                game.Level = stats.Level;
+                game.Duration = stats.Duration;
+                game.Result = stats.Result;
+                game.DatePlayed = stats.DatePlayed;
+                game.PlayerID = User.Identity.GetUserId();
+                db.Games.Add(game);
+                db.SaveChanges(); 
                 return RedirectToAction("Index");
           
         }

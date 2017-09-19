@@ -4,13 +4,44 @@ var player = function () {
 
 player.prototype.init = function() {
     this._bindEvents();
+    
    
 };
 
 player.prototype._bindEvents = function(){
     $(document).on("click", ".level", $.proxy(this._selectLevel));
     $(".start").on("click", $.proxy(this._startGame, this));
+    $(".start").on("click", $.proxy(this._timer, this));
     $(document).on("click", ".cell", $.proxy(this._takeAHumanMove));
+
+};
+
+player.prototype._timer = function () {
+
+    var timer;
+    var i = 0;
+    console.log(i);
+    var divide = 10;
+    function increment() {
+        i++;
+    }
+    function start() {
+        console.log(self);
+        timer = self.setInterval(increment, (1000))
+    }
+    
+    function stop() {
+        clearInterval(timer);
+        timer = null;
+    }
+    function reset() {
+        stop();
+        i = 0;
+    }
+    start();
+};
+
+player.prototype._stopTimer = function () {
 
 };
 
@@ -33,9 +64,16 @@ player.prototype._startGame = function () {
     if(typeof selectedDifficulty !== "undefined") {
         var aiPlayer = new AI(selectedDifficulty);
         var humanPlayer = player.prototype;
-
+       
         game = new Game(aiPlayer, humanPlayer);
-      
+
+        function increment() {
+            game.timer++;
+        }
+        setInterval(increment, (1000));
+
+        console.log(game.timer);
+
         aiPlayer.plays(game);
        
         game.start();
@@ -61,7 +99,7 @@ player.prototype._takeAHumanMove = function () {
 
 player.prototype._storeGameStats = function (stats) {
     
-    var url = "http://localhost:50685/Games/Create";
+    var url = "http://localhost:50685/Games/Create/";
     console.log(stats);
     $.ajax({
         type: "POST", url: url, data: stats, success: function (result) {

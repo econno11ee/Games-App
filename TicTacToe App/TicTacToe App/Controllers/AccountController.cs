@@ -355,7 +355,7 @@ namespace Game_App.Controllers
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
-            {
+            {   
                 return RedirectToAction("Index", "Manage");
             }
 
@@ -383,6 +383,14 @@ namespace Game_App.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        [HttpGet]
+        public string GetUserId()
+        {
+            var userId = User.Identity.GetUserId();
+            return (userId);
+            
         }
 
         //

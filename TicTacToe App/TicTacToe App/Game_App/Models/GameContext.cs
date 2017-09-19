@@ -20,5 +20,7 @@ namespace Game_App.Models
         }
 
         public System.Data.Entity.DbSet<Game_App.Models.Game> Games { get; set; }
+
+        public System.Data.Entity.DbSet<Game_App.Models.AspNetUser> AspNetUsers { get; set; }
     }
 }

@@ -5,7 +5,9 @@
 
 var Game = function(autoPlayer, player) {
 
+    
     this.player = player;
+    console.log(this.player);
     //initializes the aiplayer for this game
     this.ai = autoPlayer;
     
@@ -20,16 +22,17 @@ var Game = function(autoPlayer, player) {
 
     //initialize game status
     this.status = "beginning";
-   
 
+    //initialize game timer
+   
+    this.timer = 0;
+   
     //a function to advance the game to a new state
     this.advanceTo = function (_state) {
-        
+        var that = this;
         var stats = function (_state) {
-            this.GamePlayed = "TicTacToe";
             this.Level = autoPlayer.levelOfIntelligence;
-            this.Duration = 5;
-            this.PlayerID = "05cbcb7d-eeed-46dc-a698-9b92e9d39808"
+            this.Duration = that.timer;
             this.Result = _state.result;
             this.DatePlayed = new Date();
         };
