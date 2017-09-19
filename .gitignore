@@ -281,3 +281,12 @@ TicTacToe App/TicTacToe App/obj/Debug/TicTacToe App.dll
 *.ldf
 *.mdf
 
+
+=======
+*.pdb
+*.cache
+*.txt
+*.dll
+*.csproj
+*.config
+*.suo
