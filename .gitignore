@@ -14,3 +14,5 @@ TicTacToe App/TicTacToe App/bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll
 TicTacToe App/TicTacToe App/bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll
 TicTacToe App/.vs/Game App/v15/sqlite3/storage.ide
 TicTacToe App/TicTacToe App/obj/Debug/TicTacToe App.dll
+*.ldf
+*.mdf
